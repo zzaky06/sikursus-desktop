@@ -6,12 +6,6 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[32767, 32767]"/>
-    </Property>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[900, 600]"/>
-    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -76,38 +70,43 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="533" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="300" max="-2" attributes="0"/>
+                              <Component id="btnProses" min="-2" pref="158" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                              <Component id="btnReset" min="-2" pref="158" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="385" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="txtDiskon" max="32767" attributes="0"/>
                           <Component id="cmbKursus" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtNama" min="-2" pref="1089" max="-2" attributes="0"/>
+                          <Component id="txtNama" alignment="1" pref="1089" max="32767" attributes="0"/>
                           <Component id="txtBiaya" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtJumlah" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnProses" min="-2" pref="158" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                              <Component id="btnReset" min="-2" pref="158" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="464" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="533" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -136,14 +135,19 @@
                           <Component id="cmbKursus" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="jLabel7" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtDiskon" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="jLabel8" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnProses" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="btnReset" alignment="3" min="-2" pref="60" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace pref="237" max="32767" attributes="0"/>
+                      <EmptySpace pref="143" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -309,6 +313,30 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtDiskon">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b4" green="b4" id="Active Caption Border" palette="2" red="b4" type="palette"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDiskonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tw Cen MT" size="14" style="3"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Diskon (%)"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[155, 14]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[155, 14]"/>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

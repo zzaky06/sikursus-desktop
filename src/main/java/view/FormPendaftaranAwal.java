@@ -5,10 +5,9 @@
  */
 package view;
 
-/**
- *
- * @author USER
- */
+import javax.swing.JOptionPane;
+import model.Kursus;
+
 public class FormPendaftaranAwal extends javax.swing.JFrame {
 
     /**
@@ -16,6 +15,14 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
      */
     public FormPendaftaranAwal() {
         initComponents();
+        getRootPane().setDefaultButton(btnProses);
+
+        // Batas minimum menjaga form tetap nyaman saat window diperkecil.
+        setMinimumSize(new java.awt.Dimension(700, 520));
+
+        // Ukuran awal yang nyaman. Saat di-maximize, GroupLayout akan menyesuaikan.
+        setSize(new java.awt.Dimension(900, 560));
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,11 +49,11 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtHasil = new javax.swing.JTextArea();
         btnReset = new javax.swing.JButton();
+        txtDiskon = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(32767, 32767));
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(900, 600));
@@ -113,36 +120,53 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
             }
         });
 
+        txtDiskon.setBackground(java.awt.SystemColor.activeCaptionBorder);
+        txtDiskon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDiskonActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Tw Cen MT", 3, 14)); // NOI18N
+        jLabel8.setText("Diskon (%)");
+        jLabel8.setMaximumSize(new java.awt.Dimension(155, 14));
+        jLabel8.setMinimumSize(new java.awt.Dimension(155, 14));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(533, 533, 533))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnProses, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(88, 88, 88)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(385, 385, 385)))
+                .addGap(98, 98, 98))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(73, 73, 73)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(cmbKursus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 1089, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBiaya)
-                    .addComponent(txtJumlah))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtDiskon)
+                    .addComponent(cmbKursus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 1089, Short.MAX_VALUE)
+                    .addComponent(txtBiaya, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtJumlah, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(79, 79, 79))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnProses, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88)
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(464, 464, 464))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(533, 533, 533))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,13 +189,17 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbKursus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDiskon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnProses, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -226,12 +254,24 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsesActionPerformed
-    // Ambil data dari input field
-    String nama = txtNama.getText().trim();
-    String kursus = cmbKursus.getSelectedItem().toString();
+    // 1. AMBIL DATA INPUTAN DARI FORM
+    String namaPendaftar = txtNama.getText().trim();
+    String kursusPilihan = cmbKursus.getSelectedItem().toString();
     
+    // Menentukan Kode Kursus & Level Otomatis untuk pembuatan objek Kursus (OOP)
+    String kodeKursus = "";
+    String levelKursus = "Reguler"; 
+    
+    if (kursusPilihan.equalsIgnoreCase("Java")) {
+        kodeKursus = "JV-01";
+    } else if (kursusPilihan.equalsIgnoreCase("Data Science")) {
+        kodeKursus = "DS-02";
+    } else if (kursusPilihan.equalsIgnoreCase("UI/UX")) {
+        kodeKursus = "UI-03";
+    }
+
     // Validasi jika nama belum diisi
-    if (nama.isEmpty()) {
+    if (namaPendaftar.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this, 
             "Nama pendaftar tidak boleh kosong!", 
             "Validasi Gagal", 
@@ -240,69 +280,121 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
     }
 
     try {
-        // Validasi input angka rupiah dan jumlah
-        double biaya = Double.parseDouble(txtBiaya.getText().trim());
-        int jumlah = Integer.parseInt(txtJumlah.getText().trim());
+        // 2. AMBIL DAN VALIDASI ANGKA INPUTAN
+        double biayaSesi = Double.parseDouble(txtBiaya.getText().trim());
+        int jumlahSesi = Integer.parseInt(txtJumlah.getText().trim());
+        double persenDiskon = Double.parseDouble(txtDiskon.getText().trim());
         
-        if (biaya < 0 || jumlah < 0) {
+        if (biayaSesi < 0 || jumlahSesi < 0 || persenDiskon < 0) {
             throw new NumberFormatException();
         }
 
-        // Hitung total biaya
-        double total = biaya * jumlah;
+        // 3. INTEGRASI OOP & RUMUS MATEMATIKA DISKON (INI PERBAIKANNYA)
+        // Membuat objek kursus sesuai class model Anda
+        model.Kursus kursus = new model.Kursus(kodeKursus, kursusPilihan, levelKursus, biayaSesi);
+        
+        // Menghitung total kotor (Biaya x Jumlah Pertemuan)
+        double totalKotor = biayaSesi * jumlahSesi;
+        
+        // Menghitung besaran nominal potongan dari persen diskon
+        double nominalDiskon = totalKotor * (persenDiskon / 100);
+        
+        // Total akhir setelah dipotong diskon
+        double totalAkhir = totalKotor - nominalDiskon;
 
-        // Memformat uang Rupiah (Rp)
+        // Memformat uang Rupiah (Rp) agar rapi
         java.text.NumberFormat rupiahFormat = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
-        String formatBiaya = rupiahFormat.format(biaya);
-        String formatTotal = rupiahFormat.format(total);
+        String formatBiaya = rupiahFormat.format(biayaSesi);
+        String formatDiskon = rupiahFormat.format(nominalDiskon);
+        String formatTotal = rupiahFormat.format(totalAkhir);
 
-        // 1. MEMBUAT OUTPUT DI TEXT AREA (txtHasil)
+        // 4. MENCETAK HASIL PERBAIKAN KE TEXT AREA (txtHasil)
         txtHasil.setText(
             "==================================================\n" +
             "                HASIL PENDAFTARAN                 \n" +
             "==================================================\n" +
-            " Nama Lengkap    : " + nama + "\n" +
-            " Kursus Pilihan  : " + kursus + "\n" +
+            " Nama Lengkap    : " + namaPendaftar + "\n" +
+            " Kursus Pilihan  : " + kursusPilihan + " (" + kodeKursus + ")\n" +
             " Biaya Per Sesi  : " + formatBiaya + "\n" +
-            " Jumlah Sesi     : " + jumlah + "x pertemuan\n" +
+            " Jumlah Sesi     : " + jumlahSesi + "x pertemuan\n" +
+            " Potongan Diskon : " + persenDiskon + "% (" + formatDiskon + ")\n" +
             "--------------------------------------------------\n" +
             " TOTAL BIAYA     : " + formatTotal + "\n" +
             "=================================================="
         );
 
-        // 2. MEMBUAT POP-UP NOTIFIKASI YANG CANTIK (Menggunakan HTML)
+        // 5. MEMBUAT POP-UP NOTIFIKASI HTML YANG CANTIK
         String pesanHtml = "<html>"
             + "<body style='font-family: Segoe UI, sans-serif; font-size: 12px; color: #333333; padding: 10px;'>"
             + "  <h3 style='color: #007BFF; margin-bottom: 15px; border-bottom: 2px solid #007BFF; padding-bottom: 5px; text-align: center;'>"
-            + "     SUCCESS! HASIL PENDAFTARAN"
+            + "     SUCCESS! DATA BERHASIL DI-PROSES"
             + "  </h3>"
             + "  <table style='width: 100%; border-collapse: collapse;'>"
-            + "    <tr><td style='padding: 4px 0; font-weight: bold; width: 120px;'>Nama Lengkap</td><td style='color: #555555;'>: " + nama + "</td></tr>"
-            + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Kursus Pilihan</td><td style='color: #555555;'>: " + kursus + "</td></tr>"
+            + "    <tr><td style='padding: 4px 0; font-weight: bold; width: 120px;'>Nama Lengkap</td><td style='color: #555555;'>: " + namaPendaftar + "</td></tr>"
+            + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Kursus Pilihan</td><td style='color: #555555;'>: " + kursusPilihan + "</td></tr>"
             + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Biaya Per Sesi</td><td style='color: #555555;'>: " + formatBiaya + "</td></tr>"
-            + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Jumlah Sesi</td><td style='color: #555555;'>: " + jumlah + "x pertemuan</td></tr>"
+            + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Jumlah Sesi</td><td style='color: #555555;'>: " + jumlahSesi + "x pertemuan</td></tr>"
+            + "    <tr><td style='padding: 4px 0; font-weight: bold;'>Diskon</td><td style='color: #D32F2F;'>: " + persenDiskon + "% (" + formatDiskon + ")</td></tr>"
             + "    <tr style='border-top: 1px dashed #cccccc;'>"
-            + "        <td style='padding: 8px 0; font-weight: bold; font-size: 14px; color: #D32F2F;'>TOTAL BIAYA</td>"
-            + "        <td style='padding: 8px 0; font-weight: bold; font-size: 14px; color: #D32F2F;'>: " + formatTotal + "</td>"
+            + "        <td style='padding: 8px 0; font-weight: bold; font-size: 14px; color: #2E7D32;'>TOTAL BIAYA</td>"
+            + "        <td style='padding: 8px 0; font-weight: bold; font-size: 14px; color: #2E7D32;'>: " + formatTotal + "</td>"
             + "    </tr>"
             + "  </table>"
             + "</body>"
             + "</html>";
 
-        // Memunculkan pop-up cantik
+        // Memunculkan pop-up info sukses
         javax.swing.JOptionPane.showMessageDialog(this, 
             pesanHtml, 
             "Pendaftaran Berhasil", 
             javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
     } catch (NumberFormatException e) {
-        // Notifikasi error jika salah memasukkan harga atau jumlah
         javax.swing.JOptionPane.showMessageDialog(this, 
-            "Masukkan angka rupiah atau jumlah yang benar!\n(Jangan tulis teks 'rp' atau 'Rp' di dalam kotak input)", 
+            "Masukkan angka biaya, jumlah, dan diskon dengan benar!", 
             "Format Input Salah", 
             javax.swing.JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnProsesActionPerformed
+
+    private void txtDiskonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDiskonActionPerformed
+          // 1. Ambil data inputan dasar
+    String namaPendaftar = txtNama.getText().trim();
+    String kursusPilihan = cmbKursus.getSelectedItem().toString();
+
+    try {
+        // 2. Ambil angka perhitungan
+        double biayaSesi = Double.parseDouble(txtBiaya.getText().trim());
+        int jumlahSesi = Integer.parseInt(txtJumlah.getText().trim());
+        double persenDiskon = Double.parseDouble(txtDiskon.getText().trim());
+
+        // 3. Kalkulasi total akhir
+        double totalKotor = biayaSesi * jumlahSesi;
+        double nominalDiskon = totalKotor * (persenDiskon / 100);
+        double totalAkhir = totalKotor - nominalDiskon;
+
+        // 4. Format mata uang Rupiah
+        java.text.NumberFormat rupiahFormat = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
+        
+        // 5. Cetak kilat ke text area txtHasil
+        txtHasil.setText(
+            "==================================================\n" +
+            "            PREVIEW HITUNG CEPAT (ENTER)          \n" +
+            "==================================================\n" +
+            " Nama Pendaftar  : " + namaPendaftar + "\n" +
+            " Kursus Pilihan  : " + kursusPilihan + "\n" +
+            " Biaya Per Sesi  : " + rupiahFormat.format(biayaSesi) + "\n" +
+            " Jumlah Sesi     : " + jumlahSesi + "x pertemuan\n" +
+            " Diskon (%)      : " + persenDiskon + "% (" + rupiahFormat.format(nominalDiskon) + ")\n" +
+            "--------------------------------------------------\n" +
+            " ESTIMASI TOTAL  : " + rupiahFormat.format(totalAkhir) + "\n" +
+            "=================================================="
+        );
+
+    } catch (NumberFormatException e) {
+        txtHasil.setText("Format angka biaya, jumlah, atau diskon belum valid.");
+    }
+    }//GEN-LAST:event_txtDiskonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,10 +440,12 @@ public class FormPendaftaranAwal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtBiaya;
+    private javax.swing.JTextField txtDiskon;
     private javax.swing.JTextArea txtHasil;
     private javax.swing.JTextField txtJumlah;
     private javax.swing.JTextField txtNama;
