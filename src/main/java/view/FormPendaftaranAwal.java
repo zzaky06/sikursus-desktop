@@ -1,8 +1,4 @@
-/*
- * SIKURSUS Desktop - Form Pendaftaran Kursus
- * Lanjutan Praktikum PBO Pertemuan 4.
- * Layout responsif untuk Apache NetBeans 8.2 / Java Swing.
- */
+
 package view;
 
 import javax.swing.JOptionPane;
