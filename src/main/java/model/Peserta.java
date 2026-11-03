@@ -7,6 +7,11 @@ public class Peserta extends Orang {
     private String jenisKelamin; // Tambahan baru
     private String email;        // Tambahan baru
 
+    // DITAMBAHKAN: Constructor kosong agar sepenuhnya kompatibel dengan contoh minimal
+    public Peserta() {
+        super(); // Memanggil constructor kosong milik Orang
+    }
+
     // CONSTRUCTOR 1: Untuk mempertahankan kode lama Anda agar tidak error
     public Peserta(int id, String nama, String noHp, String nim, String prodi) {
         super(id, nama, noHp);
@@ -19,8 +24,8 @@ public class Peserta extends Orang {
         super(id, nama, noHp);
         setNim(nim);
         setProdi(prodi);
-        this.jenisKelamin = jenisKelamin;
-        this.email = email;
+        setJenisKelamin(jenisKelamin); // Menggunakan setter agar bisa ditambahkan validasi nanti
+        setEmail(email);               // Menggunakan setter agar konsisten
     }
 
     // Getter & Setter untuk NIM dan Prodi (dengan Validasi lama Anda)

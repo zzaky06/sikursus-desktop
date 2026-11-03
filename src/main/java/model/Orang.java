@@ -5,6 +5,10 @@ public class Orang {
     private String nama;
     private String noHp;
 
+    // WAJIB DITAMBAHKAN: Constructor kosong agar kompatibel dengan kelas Peserta
+    public Orang() {
+    }
+
     public Orang(int id, String nama, String noHp) {
         setId(id);
         setNama(nama);
