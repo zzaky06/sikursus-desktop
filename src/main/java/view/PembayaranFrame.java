@@ -148,9 +148,7 @@ public class PembayaranFrame extends JFrame {
 
         // BUTTONS
 
-        JButton simpan = createButton(
-            "Simpan", BLUE, WHITE
-        );
+        JButton simpan = createButton("Simpan", BLUE, WHITE);
 
         JButton ubah = createButton(
             "Ubah", new Color(5, 150, 105), WHITE
@@ -243,9 +241,7 @@ public class PembayaranFrame extends JFrame {
         JLabel awalLabel = createFilterLabel("Awal");
         JLabel akhirLabel = createFilterLabel("Akhir");
 
-        JButton cari = createButton(
-            "Cari", BLUE, WHITE
-        );
+        JButton cari = createButton("Cari", BLUE, WHITE);
 
         JButton periode = createButton(
             "Cetak Periode", new Color(5, 150, 105), WHITE
@@ -304,6 +300,56 @@ public class PembayaranFrame extends JFrame {
         });
 
         return card;
+    }
+
+    // ================= CETAK TERPILIH =================
+
+    private void printSelected() {
+
+        int row = table.getSelectedRow();
+
+        if (row < 0) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "Pilih transaksi pembayaran terlebih dahulu.",
+                "Cetak Pembayaran",
+                JOptionPane.WARNING_MESSAGE
+            );
+
+            return;
+        }
+
+        try {
+
+            int modelRow = table.convertRowIndexToModel(row);
+
+            Object value = table.getModel().getValueAt(modelRow, 0);
+
+            if (value == null) {
+                throw new NumberFormatException();
+            }
+
+            int idPembayaran = Integer.parseInt(value.toString());
+
+            if (idPembayaran <= 0) {
+                throw new NumberFormatException();
+            }
+
+            ReportService.showPembayaranById(
+                this,
+                idPembayaran
+            );
+
+        } catch (NumberFormatException ex) {
+
+            JOptionPane.showMessageDialog(
+                this,
+                "ID pembayaran tidak valid.",
+                "Kesalahan",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     // ================= COMPONENT HELPERS =================
@@ -433,8 +479,12 @@ public class PembayaranFrame extends JFrame {
 
             @Override
             public Component getTableCellRendererComponent(
-                JTable t, Object value, boolean selected,
-                boolean focus, int row, int column
+                JTable t,
+                Object value,
+                boolean selected,
+                boolean focus,
+                int row,
+                int column
             ) {
 
                 super.getTableCellRendererComponent(
@@ -462,11 +512,12 @@ public class PembayaranFrame extends JFrame {
                 .setCellRenderer(renderer);
         }
 
-        // COLUMN WIDTH
-
-        int[] widths = {55, 100, 155, 150, 110, 120, 100, 105};
+        int[] widths = {
+            55, 100, 155, 150, 110, 120, 100, 105
+        };
 
         for (int i = 0; i < widths.length; i++) {
+
             table.getColumnModel().getColumn(i)
                 .setPreferredWidth(widths[i]);
         }
@@ -500,6 +551,7 @@ public class PembayaranFrame extends JFrame {
             (LookupItem) pendaftaran.getSelectedItem();
 
         if (p == null) {
+
             throw new IllegalArgumentException(
                 "Pendaftaran wajib tersedia."
             );
@@ -537,7 +589,8 @@ public class PembayaranFrame extends JFrame {
             dao.insert(data());
 
             JOptionPane.showMessageDialog(
-                this, "Pembayaran berhasil disimpan."
+                this,
+                "Pembayaran berhasil disimpan."
             );
 
             load("");
@@ -554,7 +607,8 @@ public class PembayaranFrame extends JFrame {
         if (selected < 0) {
 
             JOptionPane.showMessageDialog(
-                this, "Pilih pembayaran terlebih dahulu."
+                this,
+                "Pilih pembayaran terlebih dahulu."
             );
 
             return;
@@ -565,7 +619,8 @@ public class PembayaranFrame extends JFrame {
             dao.update(data());
 
             JOptionPane.showMessageDialog(
-                this, "Pembayaran berhasil diperbarui."
+                this,
+                "Pembayaran berhasil diperbarui."
             );
 
             load("");
@@ -582,7 +637,8 @@ public class PembayaranFrame extends JFrame {
         if (selected < 0) {
 
             JOptionPane.showMessageDialog(
-                this, "Pilih pembayaran terlebih dahulu."
+                this,
+                "Pilih pembayaran terlebih dahulu."
             );
 
             return;
@@ -603,7 +659,8 @@ public class PembayaranFrame extends JFrame {
             dao.delete(selected);
 
             JOptionPane.showMessageDialog(
-                this, "Pembayaran berhasil dihapus."
+                this,
+                "Pembayaran berhasil dihapus."
             );
 
             load("");
@@ -612,7 +669,9 @@ public class PembayaranFrame extends JFrame {
         } catch (SQLException ex) {
 
             ViewUtil.sqlError(
-                this, "Menghapus pembayaran", ex
+                this,
+                "Menghapus pembayaran",
+                ex
             );
         }
     }
@@ -644,10 +703,14 @@ public class PembayaranFrame extends JFrame {
                 });
             }
 
+            selected = -1;
+
         } catch (SQLException ex) {
 
             ViewUtil.sqlError(
-                this, "Memuat pembayaran", ex
+                this,
+                "Memuat pembayaran",
+                ex
             );
         }
     }
@@ -656,34 +719,38 @@ public class PembayaranFrame extends JFrame {
 
     private void pick() {
 
-        int r = table.getSelectedRow();
+        int row = table.getSelectedRow();
 
-        if (r < 0) return;
+        if (row < 0) {
+            return;
+        }
+
+        int modelRow = table.convertRowIndexToModel(row);
 
         selected = Integer.parseInt(
-            table.getValueAt(r, 0).toString()
+            table.getModel().getValueAt(modelRow, 0).toString()
         );
 
         int pid = Integer.parseInt(
-            table.getValueAt(r, 1).toString()
+            table.getModel().getValueAt(modelRow, 1).toString()
         );
 
         ViewUtil.selectLookup(pendaftaran, pid);
 
         tanggal.setText(
-            table.getValueAt(r, 4).toString()
+            table.getModel().getValueAt(modelRow, 4).toString()
         );
 
         nominal.setText(
-            table.getValueAt(r, 5).toString()
+            table.getModel().getValueAt(modelRow, 5).toString()
         );
 
         metode.setSelectedItem(
-            table.getValueAt(r, 6)
+            table.getModel().getValueAt(modelRow, 6)
         );
 
         status.setSelectedItem(
-            table.getValueAt(r, 7)
+            table.getModel().getValueAt(modelRow, 7)
         );
     }
 
@@ -709,7 +776,9 @@ public class PembayaranFrame extends JFrame {
             }
 
             ReportService.showPembayaranPeriode(
-                this, a, b
+                this,
+                a,
+                b
             );
 
         } catch (IllegalArgumentException ex) {
@@ -749,7 +818,9 @@ public class PembayaranFrame extends JFrame {
         if (ex instanceof SQLException) {
 
             ViewUtil.sqlError(
-                this, action, (SQLException) ex
+                this,
+                action,
+                (SQLException) ex
             );
 
         } else {

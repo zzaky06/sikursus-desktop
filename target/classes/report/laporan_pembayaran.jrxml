@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SIKURSUS - Laporan Pembayaran Periode | JasperReports 6.21.x -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="laporan_pembayaran"
+              pageWidth="842" pageHeight="595" orientation="Landscape"
+              columnWidth="792" leftMargin="25" rightMargin="25"
+              topMargin="20" bottomMargin="20"
+              whenNoDataType="AllSectionsNoDetail"
+              uuid="d824a69e-5a67-4bc5-a30d-8f95f9c8b12a">
+
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIKURSUS MySQL"/>
+
+    <parameter name="P_TANGGAL_AWAL" class="java.sql.Date"/>
+    <parameter name="P_TANGGAL_AKHIR" class="java.sql.Date"/>
+
+    <queryString language="SQL"><![CDATA[
+SELECT
+    pb.id_pembayaran,
+    pb.tanggal_bayar,
+    pb.nominal,
+    pb.metode,
+    pb.status AS status_pembayaran,
+    p.id_pendaftaran,
+    ps.nim,
+    ps.nama AS nama_peserta,
+    kls.nama_kelas,
+    krs.nama_kursus
+FROM pembayaran pb
+INNER JOIN pendaftaran p
+    ON pb.id_pendaftaran = p.id_pendaftaran
+INNER JOIN peserta ps
+    ON p.id_peserta = ps.id_peserta
+INNER JOIN kelas kls
+    ON p.id_kelas = kls.id_kelas
+INNER JOIN kursus krs
+    ON kls.id_kursus = krs.id_kursus
+WHERE DATE(pb.tanggal_bayar) BETWEEN $P{P_TANGGAL_AWAL} AND $P{P_TANGGAL_AKHIR}
+ORDER BY pb.tanggal_bayar ASC, pb.id_pembayaran ASC
+    ]]></queryString>
+
+    <field name="id_pembayaran" class="java.lang.Integer"/>
+    <field name="tanggal_bayar" class="java.sql.Date"/>
+    <field name="nominal" class="java.math.BigDecimal"/>
+    <field name="metode" class="java.lang.String"/>
+    <field name="status_pembayaran" class="java.lang.String"/>
+    <field name="id_pendaftaran" class="java.lang.Integer"/>
+    <field name="nim" class="java.lang.String"/>
+    <field name="nama_peserta" class="java.lang.String"/>
+    <field name="nama_kelas" class="java.lang.String"/>
+    <field name="nama_kursus" class="java.lang.String"/>
+
+    <variable name="V_TOTAL_NOMINAL" class="java.math.BigDecimal" calculation="Sum">
+        <variableExpression><![CDATA[$F{nominal}]]></variableExpression>
+        <initialValueExpression><![CDATA[java.math.BigDecimal.ZERO]]></initialValueExpression>
+    </variable>
+
+    <title>
+        <band height="76" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="8" width="792" height="30" forecolor="#17365D" uuid="b1db1a1c-37e8-4a6f-91cc-100000000001"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="19" isBold="true"/>
+                </textElement>
+                <text><![CDATA[LAPORAN PEMBAYARAN KURSUS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="40" width="792" height="18" forecolor="#64748B" uuid="b1db1a1c-37e8-4a6f-91cc-100000000002"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="9"/>
+                </textElement>
+                <text><![CDATA[SIKURSUS DESKTOP  |  SISTEM INFORMASI KURSUS]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="68" width="792" height="1" forecolor="#3B82F6" uuid="b1db1a1c-37e8-4a6f-91cc-100000000003"/>
+            </line>
+        </band>
+    </title>
+
+    <pageHeader>
+        <band height="34" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="5" width="105" height="20" forecolor="#334155" uuid="b1db1a1c-37e8-4a6f-91cc-100000000004"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[PERIODE LAPORAN]]></text>
+            </staticText>
+            <textField pattern="dd MMMM yyyy">
+                <reportElement x="110" y="5" width="125" height="20" forecolor="#334155" uuid="b1db1a1c-37e8-4a6f-91cc-100000000005"/>
+                <textElement verticalAlignment="Middle"><font fontName="SansSerif" size="9"/></textElement>
+                <textFieldExpression><![CDATA[$P{P_TANGGAL_AWAL}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="238" y="5" width="25" height="20" forecolor="#64748B" uuid="b1db1a1c-37e8-4a6f-91cc-100000000006"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"><font size="9"/></textElement>
+                <text><![CDATA[s.d.]]></text>
+            </staticText>
+            <textField pattern="dd MMMM yyyy">
+                <reportElement x="268" y="5" width="125" height="20" forecolor="#334155" uuid="b1db1a1c-37e8-4a6f-91cc-100000000007"/>
+                <textElement verticalAlignment="Middle"><font fontName="SansSerif" size="9"/></textElement>
+                <textFieldExpression><![CDATA[$P{P_TANGGAL_AKHIR}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="28" splitType="Stretch">
+            <staticText><reportElement mode="Opaque" x="0" y="0" width="38" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000001"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[ID]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="38" y="0" width="78" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000002"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[TANGGAL]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="116" y="0" width="72" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000003"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[NIM]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="188" y="0" width="112" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000004"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[NAMA PESERTA]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="300" y="0" width="75" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000005"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[KELAS]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="375" y="0" width="125" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000006"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[KURSUS]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="500" y="0" width="92" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000007"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[NOMINAL (Rp)]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="592" y="0" width="95" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000008"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[METODE]]></text></staticText>
+            <staticText><reportElement mode="Opaque" x="687" y="0" width="105" height="28" backcolor="#17365D" forecolor="#FFFFFF" uuid="c1db1a1c-37e8-4a6f-91cc-100000000009"/><box><pen lineWidth="0.5" lineColor="#FFFFFF"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><text><![CDATA[STATUS]]></text></staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="26" splitType="Stretch">
+            <rectangle><reportElement mode="Opaque" x="0" y="0" width="792" height="26" backcolor="#F1F5F9" uuid="d1db1a1c-37e8-4a6f-91cc-100000000001"><printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() % 2 == 0]]></printWhenExpression></reportElement><graphicElement><pen lineWidth="0"/></graphicElement></rectangle>
+            <textField><reportElement x="0" y="0" width="38" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000002"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{id_pembayaran}]]></textFieldExpression></textField>
+            <textField pattern="dd-MM-yyyy"><reportElement x="38" y="0" width="78" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000003"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{tanggal_bayar}]]></textFieldExpression></textField>
+            <textField><reportElement x="116" y="0" width="72" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000004"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{nim}]]></textFieldExpression></textField>
+            <textField isStretchWithOverflow="true"><reportElement x="188" y="0" width="112" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000005"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{nama_peserta}]]></textFieldExpression></textField>
+            <textField><reportElement x="300" y="0" width="75" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000006"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{nama_kelas}]]></textFieldExpression></textField>
+            <textField isStretchWithOverflow="true"><reportElement x="375" y="0" width="125" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000007"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{nama_kursus}]]></textFieldExpression></textField>
+            <textField pattern="#,##0"><reportElement x="500" y="0" width="92" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000008"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Right" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{nominal}]]></textFieldExpression></textField>
+            <textField><reportElement x="592" y="0" width="95" height="26" forecolor="#334155" uuid="d1db1a1c-37e8-4a6f-91cc-100000000009"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA[$F{metode}]]></textFieldExpression></textField>
+            <textField><reportElement x="687" y="0" width="105" height="26" forecolor="#166534" uuid="d1db1a1c-37e8-4a6f-91cc-100000000010"/><box><pen lineWidth="0.4" lineColor="#CBD5E1"/></box><textElement textAlignment="Center" verticalAlignment="Middle"><font size="8" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{status_pembayaran}]]></textFieldExpression></textField>
+        </band>
+    </detail>
+
+    <columnFooter>
+        <band height="12" splitType="Stretch"/>
+    </columnFooter>
+
+    <pageFooter>
+        <band height="28" splitType="Stretch">
+            <line><reportElement x="0" y="2" width="792" height="1" forecolor="#CBD5E1" uuid="e1db1a1c-37e8-4a6f-91cc-100000000001"/></line>
+            <staticText><reportElement x="0" y="7" width="180" height="16" forecolor="#64748B" uuid="e1db1a1c-37e8-4a6f-91cc-100000000002"/><textElement verticalAlignment="Middle"><font size="8"/></textElement><text><![CDATA[SIKURSUS DESKTOP]]></text></staticText>
+            <textField><reportElement x="650" y="7" width="142" height="16" forecolor="#64748B" uuid="e1db1a1c-37e8-4a6f-91cc-100000000003"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="8"/></textElement><textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="38" splitType="Stretch">
+            <staticText><reportElement x="0" y="8" width="145" height="20" forecolor="#17365D" uuid="f1db1a1c-37e8-4a6f-91cc-100000000001"/><textElement verticalAlignment="Middle"><font size="9" isBold="true"/></textElement><text><![CDATA[JUMLAH TRANSAKSI:]]></text></staticText>
+            <textField><reportElement x="145" y="8" width="80" height="20" forecolor="#17365D" uuid="f1db1a1c-37e8-4a6f-91cc-100000000002"/><textElement verticalAlignment="Middle"><font size="9" isBold="true"/></textElement><textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression></textField>
+            <staticText><reportElement x="500" y="8" width="125" height="20" forecolor="#17365D" uuid="f1db1a1c-37e8-4a6f-91cc-100000000003"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement><text><![CDATA[TOTAL PEMBAYARAN: Rp]]></text></staticText>
+            <textField pattern="#,##0"><reportElement x="625" y="8" width="167" height="20" forecolor="#17365D" uuid="f1db1a1c-37e8-4a6f-91cc-100000000004"/><textElement textAlignment="Right" verticalAlignment="Middle"><font size="9" isBold="true"/></textElement><textFieldExpression><![CDATA[$V{V_TOTAL_NOMINAL}]]></textFieldExpression></textField>
+        </band>
+    </summary>
+</jasperReport>

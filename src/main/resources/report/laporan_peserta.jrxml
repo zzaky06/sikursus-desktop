@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Modern participant report | Jaspersoft Studio 6.21.5 / JasperReports 6.21.5 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="laporan_peserta"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="24" bottomMargin="24"
+              whenNoDataType="AllSectionsNoDetail"
+              uuid="1e3a5497-4337-4f8b-8ba2-59cf41f0e2d7">
+
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIKURSUS MySQL"/>
+
+    <style name="Base" fontName="SansSerif" fontSize="9" forecolor="#243247"/>
+    <style name="TableCell" mode="Opaque" backcolor="#FFFFFF" forecolor="#243247" fontName="SansSerif" fontSize="8">
+        <box leftPadding="5" rightPadding="5" topPadding="4" bottomPadding="4">
+            <pen lineWidth="0.45" lineColor="#D8E1EC"/>
+        </box>
+    </style>
+    <style name="TableHeader" mode="Opaque" backcolor="#17365D" forecolor="#FFFFFF" fontName="SansSerif" fontSize="8" isBold="true">
+        <box leftPadding="4" rightPadding="4" topPadding="5" bottomPadding="5">
+            <pen lineWidth="0.45" lineColor="#FFFFFF"/>
+        </box>
+    </style>
+    <style name="Footer" fontName="SansSerif" fontSize="8" forecolor="#64748B"/>
+
+    <queryString language="SQL">
+        <![CDATA[
+SELECT
+    id_peserta,
+    nim,
+    nama,
+    jenis_kelamin,
+    prodi,
+    no_hp,
+    email
+FROM peserta
+ORDER BY nama ASC
+        ]]>
+    </queryString>
+
+    <field name="id_peserta" class="java.lang.Integer">
+        <property name="com.jaspersoft.studio.field.name" value="id_peserta"/>
+        <property name="com.jaspersoft.studio.field.label" value="id_peserta"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="nim" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="nim"/>
+        <property name="com.jaspersoft.studio.field.label" value="nim"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="nama" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="nama"/>
+        <property name="com.jaspersoft.studio.field.label" value="nama"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="jenis_kelamin" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="jenis_kelamin"/>
+        <property name="com.jaspersoft.studio.field.label" value="jenis_kelamin"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="prodi" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="prodi"/>
+        <property name="com.jaspersoft.studio.field.label" value="prodi"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="no_hp" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="no_hp"/>
+        <property name="com.jaspersoft.studio.field.label" value="no_hp"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+    <field name="email" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="email"/>
+        <property name="com.jaspersoft.studio.field.label" value="email"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="peserta"/>
+    </field>
+
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+
+    <title>
+        <band height="112" splitType="Stretch">
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="32" forecolor="#17365D" uuid="5d6a1001-8a0c-4b77-a7b4-000000000001"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="19" isBold="true"/>
+                </textElement>
+                <text><![CDATA[LAPORAN DATA PESERTA KURSUS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="0" y="44" width="555" height="20" forecolor="#64748B" uuid="5d6a1001-8a0c-4b77-a7b4-000000000002"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="9"/>
+                </textElement>
+                <text><![CDATA[SIKURSUS DESKTOP  |  PEMROGRAMAN BERORIENTASI OBJEK]]></text>
+            </staticText>
+            <line>
+                <reportElement x="0" y="77" width="555" height="1" forecolor="#2F75B5" uuid="5d6a1001-8a0c-4b77-a7b4-000000000003"/>
+                <graphicElement>
+                    <pen lineWidth="1.5" lineColor="#2F75B5"/>
+                </graphicElement>
+            </line>
+            <staticText>
+                <reportElement x="0" y="84" width="555" height="17" forecolor="#334155" uuid="5d6a1001-8a0c-4b77-a7b4-000000000004"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[DAFTAR PESERTA TERDAFTAR]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <pageHeader>
+        <band height="6" splitType="Stretch"/>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="30" splitType="Stretch">
+            <staticText>
+                <reportElement style="TableHeader" x="0" y="0" width="28" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000010"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[NO]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="28" y="0" width="75" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000011"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[NIM]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="103" y="0" width="112" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000012"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[NAMA PESERTA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="215" y="0" width="38" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000013"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[JK]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="253" y="0" width="75" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000014"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[PRODI]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="328" y="0" width="86" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000015"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[NO. HP]]></text>
+            </staticText>
+            <staticText>
+                <reportElement style="TableHeader" x="414" y="0" width="141" height="30" uuid="5d6a1001-8a0c-4b77-a7b4-000000000016"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[EMAIL]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="27" splitType="Stretch">
+            <textField>
+                <reportElement style="TableCell" x="0" y="0" width="28" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000020"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement style="TableCell" x="28" y="0" width="75" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000021"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{nim}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement style="TableCell" x="103" y="0" width="112" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000022"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="215" y="0" width="38" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000023"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{jenis_kelamin}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement style="TableCell" x="253" y="0" width="75" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000024"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{prodi}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="TableCell" x="328" y="0" width="86" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000025"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{no_hp}]]></textFieldExpression>
+            </textField>
+            <textField isStretchWithOverflow="true">
+                <reportElement style="TableCell" x="414" y="0" width="141" height="27" uuid="5d6a1001-8a0c-4b77-a7b4-000000000026"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <columnFooter>
+        <band height="8" splitType="Stretch"/>
+    </columnFooter>
+
+    <pageFooter>
+        <band height="30" splitType="Stretch">
+            <line>
+                <reportElement x="0" y="2" width="555" height="1" forecolor="#D8E1EC" uuid="5d6a1001-8a0c-4b77-a7b4-000000000030"/>
+                <graphicElement>
+                    <pen lineWidth="0.7" lineColor="#D8E1EC"/>
+                </graphicElement>
+            </line>
+            <textField pattern="dd MMMM yyyy">
+                <reportElement style="Footer" x="0" y="8" width="250" height="16" uuid="5d6a1001-8a0c-4b77-a7b4-000000000031"/>
+                <textElement verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement style="Footer" x="405" y="8" width="150" height="16" uuid="5d6a1001-8a0c-4b77-a7b4-000000000032"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA["Halaman " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="5" splitType="Stretch"/>
+    </summary>
+</jasperReport>

@@ -180,9 +180,34 @@ public class PesertaFrame extends JFrame {
         hapus.addActionListener(e -> delete());
         reset.addActionListener(e -> clear());
 
-        cetak.addActionListener(e ->
-            ReportService.showPeserta(this)
+
+cetak.addActionListener(e -> {
+    System.out.println("=== DEBUG CETAK PESERTA ===");
+
+    try {
+        JOptionPane.showMessageDialog(
+            this,
+            "Tombol Cetak Semua berhasil diklik!"
         );
+
+        System.out.println("Memanggil ReportService...");
+
+        ReportService.showPeserta(this);
+
+        System.out.println("ReportService selesai.");
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Gagal mencetak laporan:\n" + ex.getMessage(),
+            "Error Cetak",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+});
+
 
         getRootPane().setDefaultButton(simpan);
 

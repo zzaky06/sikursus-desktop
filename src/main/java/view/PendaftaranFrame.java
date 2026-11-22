@@ -187,9 +187,15 @@ public class PendaftaranFrame extends JFrame {
         hapus.addActionListener(e -> delete());
         reset.addActionListener(e -> clear());
 
-        semua.addActionListener(e ->
-            ReportService.showPendaftaranSemua(this)
-        );
+semua.addActionListener(e -> {
+
+    JOptionPane.showMessageDialog(
+        this,
+        "Tombol Cetak Semua berhasil diklik!"
+    );
+
+    ReportService.showPendaftaranSemua(this);
+});
 
         terpilih.addActionListener(e -> {
 
